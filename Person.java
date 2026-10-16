@@ -6,7 +6,7 @@ public abstract class Person implements IPerson {
 	protected LinkedList<IRide> rideHistory;
 	
 	
-	public  Person (String n , int id , String pn , LinkedList<IRide> rh) {
+	public  Person (String n , int id , String pn) {
 		name = n;
 		ID = id;
 		setPhoneNumber(pn);
