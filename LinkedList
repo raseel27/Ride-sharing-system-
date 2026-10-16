@@ -67,4 +67,17 @@ public class LinkedList <T> implements List <T> {
 		current = current.next;
 		}	
 
+	public static <T> int length(LinkedList<T> l) {
+		int count = 0;
+		if (l.empty() == false) {
+			l.findFirst();
+			while (l.last() == false) {
+				count++;
+				l.findNext();
+				}
+			count++;
+			}
+		return count;
+		}
+
 }
