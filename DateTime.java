@@ -39,6 +39,7 @@ public class DateTime implements IDateTime {
 
 	public int compareTo(IDateTime other) {
 		
+		
 		if (year != other.getYear())
 			return year > other.getYear()? 1 : -1;	
 			
@@ -59,4 +60,3 @@ public class DateTime implements IDateTime {
 				
 	
 }
-
