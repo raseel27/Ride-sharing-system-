@@ -1,3 +1,5 @@
+package codes;
+
 public class Driver extends Person implements IDriver{
 	
 	private String vehiclePlate;
@@ -43,6 +45,7 @@ public class Driver extends Person implements IDriver{
 
 
 	public void setVehicleType(VehicleType vehicleType) {
+		this.vehicleType = vehicleType;
 		
 	}
 
