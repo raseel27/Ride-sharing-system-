@@ -1,258 +1,183 @@
-public class RiderList implements IRiderList {
-    private Node<IRider> head;
+public class RideList implements IRideList {
+    private Node<IRide> head;
     private int size;
 
-    public RiderList() {
+    public RideList() {
         head = null;
         size = 0;
     }
 
-    public boolean add(IRider rider) {
-    	//check if the rider is null
-    	if(rider == null) {
-        return false;
-    }
-    	//the list is empty
-    	if (head == null) {
-            head = new Node<IRider>(rider);
-            size++;
-            return true;
+    public boolean addRide(IRide ride) {
+    	if (ride == null) {
+            return false;
         }
-    	
-    	if (rider.compareTo(head.data) < 0) {
-            Node<IRider> newNode = new Node<IRider>(rider);
-            newNode.next  = head;
-            head =  newNode;
-            size++ ;
-            return true;
-        }
-    	Node<IRider> current = head;
 
-        while (current.next != null &&
-               current.next.data.compareTo(rider) < 0) {
-            current = current.next;
-        }
-        if (current.data.compareTo(rider) == 0 || (current.next != null && current.next.data.compareTo(rider) == 0)) {
+        Node<IRide> check = head;
+
+        while (check != null) {
+            if (check.data.getRideId() == ride.getRideId()) {
                 return false;
             }
-        Node<IRider> newNode = new Node<IRider>(rider);
-        newNode.next = current.next;
-        current.next = newNode;
-        size++;
+            check = check.next;
+        }
 
+        Node<IRide> newNode = new Node<IRide>(ride);
+
+        if (head == null) {
+            head = newNode;
+        }
+
+        else if (ride.compareTo(head.data) < 0) {
+            newNode.next = head;
+            head = newNode;
+        }
+
+        else {
+            Node<IRide> current = head;
+
+            while (current.next != null &&
+                   current.next.data.compareTo(ride) <= 0) {
+                current = current.next;
+            }
+
+            newNode.next = current.next;
+            current.next = newNode;
+        }
+
+        size++;
         return true;
     }
-    
-    public IRider findById(int riderId) {
-    	Node<IRider> current = head;
 
-        while (current != null) {
-
-            int currentId = current.data.getId();
-            if (currentId == riderId) {
-                return current.data;
-            }
-            //stop searching if we passed the rider id
-            if (currentId > riderId) {
-                return null;
-            }
-
-            current = current.next;
-        }
-        return null;
-    }
-
-    public LinkedList<IRider> findByName(String fullName) {
-    	LinkedList<IRider> matches = new LinkedList<IRider>();
-    	if (fullName == null) {
-            return matches;
-        }
-    	Node<IRider> current = head;
-    	while (current != null) {
-
-            if (fullName.equals(current.data.getName())) {
-                matches.insert(current.data);
-            }
-
-            current = current.next;
-        }
-
-        return matches;
-    }
-
-    public IRider findByEmail(String email) {
-    	if (email == null) {
-            return null;
-        }
-
-        Node<IRider> current = head;
-
-        while (current != null) {
-
-            if (email.equalsIgnoreCase(current.data.getEmail())) {
-                return current.data;
-            }
-            current = current.next;
-        }
-        return null;
-    }
-
-    
-    public LinkedList<IRider> findByHomeCity(String homeCity) {
-    	LinkedList<IRider> matches = new LinkedList<IRider>();
-
-        if (homeCity == null) {
-            return matches;
-        }
-
-        Node<IRider> current = head;
-        while (current != null) {
-
-            if (homeCity.equalsIgnoreCase(current.data.getHomeCity())) {
-                matches.insert(current.data);
-            }
-
-            current = current.next;
-        }
-
-        return matches;
-    }
-
-    public LinkedList<IRider> getAll() {
-    	LinkedList<IRider> allRiders = new LinkedList<IRider>();
-        Node<IRider> current = head;
-        while (current != null) {
-            allRiders.insert(current.data);
-            current = current.next;
-        }
-
-        return allRiders;
-    }
-
-    public boolean removeById(int riderId) {
+    public boolean removeRideById(int rideId) {
     	if (head == null) {
             return false;
         }
 
-        if (head.data.getId() == riderId) {
+        if (head.data.getRideId() == rideId) {
             head = head.next;
             size--;
             return true;
         }
 
-        if (head.data.getId() > riderId) {
-            return false;
-        }
-
-        Node<IRider> current = head;
+        Node<IRide> current = head;
 
         while (current.next != null) {
 
-            int nextId = current.next.data.getId();
+            int nextRideId = current.next.data.getRideId();
 
-            if (nextId == riderId) {
+            if (nextRideId == rideId) {
                 current.next = current.next.next;
                 size--;
                 return true;
             }
 
-            if (nextId > riderId) {
+            current = current.next;
+        }
+    	return false;
+    }
+
+    public LinkedList<IRide> getAllAlphabetically() {
+    	LinkedList<IRide> sortedRides = new LinkedList<IRide>();
+        Node<IRide> current = head;
+
+        // Copy all rides in their alphabetical order
+        while (current != null) {
+            sortedRides.insert(current.data);
+            current = current.next;
+        }
+
+        return sortedRides;
+    }
+
+    public LinkedList<IRide> findByPickupLocation(String pickupLocation) {
+    	LinkedList<IRide> matchingRides = new LinkedList<IRide>();
+
+        if (pickupLocation == null) {
+            return matchingRides;
+        }
+
+        Node<IRide> current = head;
+
+        while (current != null) {
+
+            if (pickupLocation.equalsIgnoreCase(current.data.getPickupLocation())) {
+                matchingRides.insert(current.data);
+            }
+
+            current = current.next;
+        }
+
+        return matchingRides;
+    }
+
+    public LinkedList<IRide> findByRiderName(String riderFullName) {
+    	LinkedList<IRide> matchingRides = new LinkedList<IRide>();
+
+        // Check if the name is null
+        if (riderFullName == null) {
+            return matchingRides;
+        }
+
+        Node<IRide> current = head;
+
+        // Search through all rides
+        while (current != null) {
+
+            if (hasRiderNamed(current.data, riderFullName)) {
+                matchingRides.insert(current.data);
+            }
+
+            current = current.next;
+        }
+
+        return matchingRides;	 
+    }
+
+    private boolean hasRiderNamed(IRide ride, String name) {
+    	if (ride == null || name == null) {
+            return false;
+        }
+
+        if (ride instanceof IPrivateRide) {
+
+            IPrivateRide privateRide = (IPrivateRide) ride;
+            IRider rider = privateRide.getRider();
+
+            return rider != null && name.equals(rider.getName());
+        }
+
+        if (ride instanceof ISharedRide) {
+
+            ISharedRide sharedRide = (ISharedRide) ride;
+            LinkedList<IRider> participants = sharedRide.getParticipants();
+
+            if (participants == null || participants.empty()) {
                 return false;
             }
 
-            current = current.next;
-        }
-    	return false;
-    }
+            participants.findFirst();
 
-    public boolean removeByEmail(String email) {
-    	if (email == null || head == null) {
-            return false;
-        }
+            while (true) {
 
-        if (email.equalsIgnoreCase(head.data.getEmail())) {
-            head = head.next;
-            size--;
-            return true;
-        }
+                IRider currentRider = participants.retrieve();
 
-        Node<IRider> current = head;
+                if (currentRider != null &&
+                    name.equals(currentRider.getName())) {
+                    return true;
+                }
 
-        while (current.next != null) {
+                if (participants.last()) {
+                    break;
+                }
 
-            if (email.equalsIgnoreCase(current.next.data.getEmail())) {
-                current.next = current.next.next;
-                size--;
-                return true;
-            }
-
-            current = current.next;
-        }
-    	return false;
-    }
-
-    public int removeByName(String fullName) {
-    	if (fullName == null) {
-            return 0;
-        }
-
-        int removedCount = 0;
-
-        while (head != null && fullName.equals(head.data.getName())) {
-            head = head.next;
-            removedCount++;
-        }
-
-        Node<IRider> current = head;
-
-        while (current != null && current.next != null) {
-
-            if (fullName.equals(current.next.data.getName())) {
-                current.next = current.next.next;
-                removedCount++;
-            } else {
-                current = current.next;
+                participants.findNext();
             }
         }
 
-        size -= removedCount;
-
-        return removedCount;
-    }
-
-    public int removeByHomeCity(String homeCity) {
-    	if (homeCity == null) {
-            return 0;
-        }
-
-        int removedCount = 0;
-
-        while (head != null &&
-               homeCity.equalsIgnoreCase(head.data.getHomeCity())) {
-
-            head = head.next;
-            removedCount++;
-        }
-
-        Node<IRider> current = head;
-
-        while (current != null && current.next != null) {
-
-            if (homeCity.equalsIgnoreCase(current.next.data.getHomeCity())) {
-                current.next = current.next.next;
-                removedCount++;
-            } else {
-                current = current.next;
-            }
-        }
-
-        size -= removedCount;
-
-        return removedCount;
+        return false;
     }
 
     public int size() {
-     return size;
+        return size;
     }
 }
-
