@@ -27,7 +27,7 @@ public class Rider extends Person implements IRider {
 		
 	}
 
-	public int compareTo(IRider other) {
+	public int compareTo(IRider other) { //compare riders by id
 		
 		if (ID == other.getId())
 			return 0;
