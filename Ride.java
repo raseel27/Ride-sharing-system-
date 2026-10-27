@@ -56,11 +56,11 @@ public abstract class Ride implements IRide{
 	public abstract boolean hasRider(int riderId);
 
 	public String toString() {
-		return "Pickup Location: " + pickUpLocation + "\nDropoff Location: " + dropOffLocation + "\nPickup Time: " + pickUpTime.format() + "\nDropoff Time: " + dropOffTime.format() + "\nRide Driver: " + driver.getName() + "\nRide ID: " + RideID +"\nRide Driver: " ;
+		return "Ride ID: " + RideID + "\nPickup Location: " + pickUpLocation + "\nDropoff Location: " + dropOffLocation + "\nPickup Time: " + pickUpTime.format() + "\nDropoff Time: " + dropOffTime.format() + "\nRide Driver: " + driver.getName()  +"\nRide Driver: " + driver.getName() + "\nDriver ID: " + driver.getId() + "\n" ;
 	}
 
 	
-	public int compareTo(IRide other) {
+	public int compareTo(IRide other) { //comparing rides alphabetically by pickup location
 		
 		return pickUpLocation.compareTo(other.getPickupLocation());
 		
