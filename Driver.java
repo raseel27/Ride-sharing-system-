@@ -21,16 +21,16 @@ public class Driver extends Person implements IDriver{
 
 	public void setVehiclePlate(String vehiclePlate) {
 		
-		if (vehiclePlate.length() != 7)
+		if (vehiclePlate == null || vehiclePlate.length() != 7) //message to user if plate length is not exactly 7
 			throw new IllegalArgumentException ("Vehicle plate should be 7 charachters.\n");
 		
 		for (int i = 0; i < 3 ; i ++) {
-			if (!Character.isUpperCase(vehiclePlate.charAt(i)))
+			if (!Character.isUpperCase(vehiclePlate.charAt(i)))  //checking if the first 3 characters are upper case letters
 				throw new IllegalArgumentException ("First 3 characters must be upper case letters.\n");
 		}
 		
 		for (int i = 3 ; i < 7 ; i++) {
-			if (!Character.isDigit(vehiclePlate.charAt(i)))
+			if (!Character.isDigit(vehiclePlate.charAt(i))) //checking if the last 4 characters are numbers
 				throw new IllegalArgumentException("Last 4 characters must be numbers.\n");
 		}
 					
@@ -49,7 +49,7 @@ public class Driver extends Person implements IDriver{
 		
 	}
 
-	public int compareTo(IDriver other) {
+	public int compareTo(IDriver other) { //compare drivers by their id
 		
 		if (ID == other.getId())
 			return 0;
