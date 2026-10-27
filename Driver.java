@@ -8,8 +8,8 @@ public class Driver extends Person implements IDriver{
 
 	public Driver(String n, int id , String pn , String vp, String vt) {
 		super(n, id, pn );
-		vehiclePlate = vp;
-		setVehiclePlate(vt);
+		setVehiclePlate(vp);
+		this.vehicleType = VehicleType.valueOf(vt.trim().replace(' ', '_').toUpperCase());
 		
 		
 	}
@@ -25,7 +25,7 @@ public class Driver extends Person implements IDriver{
 			throw new IllegalArgumentException ("Vehicle plate should be 7 charachters.\n");
 		
 		for (int i = 0; i < 3 ; i ++) {
-			if (!Character.isUpperCase(vehiclePlate.charAt(i)))  //checking if the first 3 characters are upper case letters
+			if (!Character.isUpperCase(vehiclePlate.charAt(i)))  //checking if the first 3 characters are uppercase letters
 				throw new IllegalArgumentException ("First 3 characters must be upper case letters.\n");
 		}
 		
