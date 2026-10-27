@@ -1,6 +1,6 @@
 public class SharedRide extends Ride implements ISharedRide{
 	
-	private LinkedList<IRider> riders = new LinkedList<IRider>();
+	private LinkedList<IRider> riders = new LinkedList<IRider>(); // several riders
 	
 	
 	public SharedRide (String pickL , String dropL , IDateTime pickup , IDateTime dropoff , IDriver d, int id) {
@@ -13,7 +13,7 @@ public class SharedRide extends Ride implements ISharedRide{
 	}
 
 	
-	public boolean addParticipant(IRider rider) {
+	public boolean addParticipant(IRider rider) { //adds rider if id doesnt exist already
 		if (rider == null || hasRider(rider.getId()))
 			return false;
 	
@@ -22,9 +22,9 @@ public class SharedRide extends Ride implements ISharedRide{
 	}
 
 	
-	public boolean removeParticipantById(int riderId) { 
+	public boolean removeParticipantById(int riderId) {  //searches for a rider by id and removes if found
 		
-		if (riders == null || riders.empty())
+		if (riders.empty())
 			return false;
 			
 		riders.findFirst();
@@ -48,20 +48,19 @@ public class SharedRide extends Ride implements ISharedRide{
 	}
 
 
-	public boolean hasRider(int riderId) {
+	public boolean hasRider(int riderId) { //looks through the partcipants of the ride searching for a specific rider by id
 		
-		if (riders == null || riders.empty())
+		if ( riders.empty())
 			return false;
-		
+		riders.findFirst();
 		while (! riders.last() ) {
 			if (riders.retrieve().getId() == riderId)
 				return true;
+			riders.findNext();
 		}
 		
-		if (riders.retrieve().getId() == riderId)
-			return true;
+		return riders.retrieve().getId() == riderId;
 		
-		return false;
 	}
 
 }
