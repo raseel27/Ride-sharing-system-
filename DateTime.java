@@ -37,7 +37,7 @@ public class DateTime implements IDateTime {
 		return String.format("%02d/%02d/%d %02d:%02d", month, day, year, hour, minute);
 	}
 
-	public int compareTo(IDateTime other) {
+	public int compareTo(IDateTime other) { //compares dates chronologically 
 		
 		
 		if (year != other.getYear())
