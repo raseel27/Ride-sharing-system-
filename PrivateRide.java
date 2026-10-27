@@ -1,6 +1,6 @@
 public class PrivateRide extends Ride implements IPrivateRide{
 	
-	private IRider rider;
+	private IRider rider; // one rider only
 	
 	public PrivateRide (String pickL , String dropL , IDateTime pickup , IDateTime dropoff , IDriver d , int id, IRider r) {
 		super (pickL , dropL , pickup , dropoff , d , id);
@@ -24,7 +24,7 @@ public class PrivateRide extends Ride implements IPrivateRide{
 	}
 	
 	public String toString() {
-		return super.toString() + "\nRider: " + rider.toString();
+		return "[Private Ride]\n" + super.toString() + "\nRider: " + rider.getName() +"\nRider ID: "+ rider.getId() +"\n";
 	}
 
 }
