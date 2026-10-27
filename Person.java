@@ -48,7 +48,7 @@ public abstract class Person implements IPerson {
 		return rideHistory;
 	}
 	
-	public String totring() {
+	public String toString() {
 		return "Name: " + name + "\nID: " + ID + "\nPhone Number: " + PhoneNumber + "\nRide History: " + rideHistory.toString() + "\n";
 	}
 	
