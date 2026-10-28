@@ -1,10 +1,12 @@
+package codes;
+
 public class Rider extends Person implements IRider {
 
 	private String email;
 	private String city;
 	
-	public Rider (String n, String pn , int id , String e, String c) {
-		super (n , id , pn);
+	public Rider (int id , String n, String pn , String e, String c) {
+		super (id, n , pn);
 		email = e;
 		city = c;
 	}
@@ -27,7 +29,7 @@ public class Rider extends Person implements IRider {
 		
 	}
 
-	public int compareTo(IRider other) { //compare riders by id
+	public int compareTo(IRider other) {
 		
 		if (ID == other.getId())
 			return 0;
