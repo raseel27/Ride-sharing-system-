@@ -1,3 +1,5 @@
+package codes;
+
 public abstract class Ride implements IRide{
 
 	protected String pickUpLocation;
@@ -7,7 +9,7 @@ public abstract class Ride implements IRide{
 	protected IDriver driver;
 	protected final int RideID;
 	
-	public Ride (String pickL , String dropL , IDateTime pickup , IDateTime dropoff , IDriver d , int id) {
+	public Ride (String pickL , IDateTime pickup , String dropL , IDateTime dropoff , IDriver d , int id) {
 		pickUpLocation = pickL;
 		dropOffLocation = dropL;
 		pickUpTime = pickup;
@@ -68,4 +70,3 @@ public abstract class Ride implements IRide{
 		
 		
 	}
-
