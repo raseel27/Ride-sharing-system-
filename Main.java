@@ -85,7 +85,7 @@ public class Main {
 				String riderCity = input.nextLine();
 
 				try {
-					Rider rider = new Rider(riderName, riderPhone, riderID, riderEmail, riderCity);
+					Rider rider = new Rider(riderID, riderName, riderPhone, riderEmail, riderCity);
 					if (rideSharing.addRider(rider))
 						System.out.println("Rider added successfully");
 					else
@@ -136,10 +136,11 @@ public class Main {
 				String driverPlate = input.nextLine();
 
 				System.out.println("Enter driver vehicle type: SEDAN, LUXURY_SEDAN, SUV, VAN) ");
-				String vType = input.nextLine();
+				VehicleType vType = VehicleType.valueOf( input.nextLine());
+				
 
 				try {
-					Driver driver = new Driver(driverName, driverID, driverPhone, driverPlate, vType);
+					Driver driver = new Driver(driverID, driverName, driverPhone, driverPlate, vType);
 					if (rideSharing.addDriver(driver))
 						System.out.println("Driver added successfully");
 
@@ -192,31 +193,13 @@ public class Main {
 				System.out.println("Enter dropoff location: ");
 				String dropoffL = input.nextLine();
 
-				System.out.println("Enter pickup time: (year)"); // pick up date/time
-				int pickupYear = input.nextInt();
-				System.out.println("Enter pickup time: (month)");
-				int pickupMonth = input.nextInt();
-				System.out.println("Enter pickup time: (day)");
-				int pickupDay = input.nextInt();
-				System.out.println("Enter pickup time: (hour)");
-				int pickupHour = input.nextInt();
-				System.out.println("Enter pickup time: (minutes)");
-				int pickupMin = input.nextInt();
+				System.out.println("Enter pickup date and time: DD/MM/YYYY HH:MM"); // pick up date/time
+				DateTime pickupDT = DateTime.parse(input.nextLine());
+				
 
-				DateTime pickupDT = new DateTime(pickupYear, pickupMonth, pickupDay, pickupHour, pickupMin);
+				System.out.println("Enter dropoff date and time: DD/MM/YYYY HH:MM" );  // drop off date/time
+				DateTime dropoffDT = DateTime.parse(input.nextLine());
 
-				System.out.println("Enter dropoff time: (year) "); // drop off date/time
-				int dropoffYear = input.nextInt();
-				System.out.println("Enter dropoff time: (month) ");
-				int dropoffMonth = input.nextInt();
-				System.out.println("Enter dropoff time: (day) ");
-				int dropoffDay = input.nextInt();
-				System.out.println("Enter dropoff time: (hour) ");
-				int dropoffHour = input.nextInt();
-				System.out.println("Enter dropoff time: (minutes) ");
-				int dropoffMin = input.nextInt();
-
-				DateTime dropoffDT = new DateTime(dropoffYear, dropoffMonth, dropoffDay, dropoffHour, dropoffMin);
 
 				System.out.println("Enter pickup driver ID: ");
 				int rideDriverID = input.nextInt();
@@ -272,4 +255,3 @@ public class Main {
 	}
 
 }
-
