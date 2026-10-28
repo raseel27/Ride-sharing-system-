@@ -1,3 +1,5 @@
+package codes;
+
 public abstract class Person implements IPerson {
 	
 	protected String name;
@@ -6,7 +8,7 @@ public abstract class Person implements IPerson {
 	protected LinkedList<IRide> rideHistory;
 	
 	
-	public  Person (String n , int id , String pn) {
+	public  Person ( int id , String n , String pn) {
 		name = n;
 		ID = id;
 		setPhoneNumber(pn); //phone number format validation
