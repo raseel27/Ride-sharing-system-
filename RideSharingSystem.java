@@ -8,6 +8,7 @@ public class RideSharingSystem implements IRideSharingSystem {
     private RiderList riders;
     private DriverList drivers;
     private RideList rides;
+    private int nextRideId = 1;
 
     public RideSharingSystem() {
         this.riders = new RiderList();
@@ -216,7 +217,7 @@ public class RideSharingSystem implements IRideSharingSystem {
         if (hasConflict(targetDriver, pickupTime, dropoffTime))
             return false;
 
-        IRide createdRide = new PrivateRide(pickupLocation, pickupTime, dropoffTime, dropoffLocation, targetDriver, targetRider);
+        IRide createdRide = new PrivateRide(pickupLocation, pickupTime,  dropoffLocation, dropoffTime, targetDriver, nextRideId++ , targetRider);
         rides.addRide(createdRide);
         targetRider.getRideHistory().insert(createdRide);
         targetDriver.getRideHistory().insert(createdRide);
@@ -248,7 +249,7 @@ public class RideSharingSystem implements IRideSharingSystem {
             }
         }
 
-        SharedRide sharedRideObj = new SharedRide(pickupLocation, pickupTime, dropoffLocation, dropoffTime, targetDriver);
+        SharedRide sharedRideObj = new SharedRide(pickupLocation, pickupTime, dropoffLocation, dropoffTime, targetDriver , nextRideId++);
         for (int idx = 0; idx < groupList.length; idx++) {
             sharedRideObj.addParticipant(groupList[idx]);
             groupList[idx].getRideHistory().insert(sharedRideObj);
@@ -405,4 +406,3 @@ public class RideSharingSystem implements IRideSharingSystem {
         targetCol.insert(newRider);
     }
 }
-
