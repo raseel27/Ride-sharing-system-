@@ -1,9 +1,11 @@
+package codes;
+
 public class PrivateRide extends Ride implements IPrivateRide{
 	
 	private IRider rider; // one rider only
 	
-	public PrivateRide (String pickL , String dropL , IDateTime pickup , IDateTime dropoff , IDriver d , int id, IRider r) {
-		super (pickL , dropL , pickup , dropoff , d , id);
+	public PrivateRide (String pickL ,  IDateTime pickup , String dropL , IDateTime dropoff , IDriver d , int id, IRider r) {
+		super (pickL ,  pickup , dropL , dropoff , d , id);
 		rider = r;
 	}
 
