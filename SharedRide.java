@@ -1,10 +1,12 @@
+package codes;
+
 public class SharedRide extends Ride implements ISharedRide{
 	
 	private LinkedList<IRider> riders = new LinkedList<IRider>(); // several riders
 	
 	
-	public SharedRide (String pickL , String dropL , IDateTime pickup , IDateTime dropoff , IDriver d, int id) {
-		super (pickL , dropL , pickup , dropoff , d , id);
+	public SharedRide (String pickL , IDateTime pickup , String dropL , IDateTime dropoff , IDriver d, int id) {
+		super (pickL , pickup , dropL , dropoff , d , id);
 		
 	}
 
@@ -48,7 +50,7 @@ public class SharedRide extends Ride implements ISharedRide{
 	}
 
 
-	public boolean hasRider(int riderId) { //looks through the partcipants of the ride searching for a specific rider by id
+	public boolean hasRider(int riderId) { //looks through the participants of the ride searching for a specific rider by id
 		
 		if ( riders.empty())
 			return false;
