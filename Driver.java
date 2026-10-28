@@ -6,10 +6,10 @@ public class Driver extends Person implements IDriver{
 	private VehicleType vehicleType;
 	
 
-	public Driver(String n, int id , String pn , String vp, String vt) {
-		super(n, id, pn );
+	public Driver( int id, String n , String pn , String vp, VehicleType vt) {
+		super( id, n, pn );
 		setVehiclePlate(vp);
-		this.vehicleType = VehicleType.valueOf(vt.trim().replace(' ', '_').toUpperCase());
+		this.vehicleType = vt;
 		
 		
 	}
