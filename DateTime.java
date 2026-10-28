@@ -1,3 +1,5 @@
+package codes;
+
 public class DateTime implements IDateTime {
 	
 	final private int minute , hour, day , month , year;
@@ -37,7 +39,7 @@ public class DateTime implements IDateTime {
 		return String.format("%02d/%02d/%d %02d:%02d", month, day, year, hour, minute);
 	}
 
-	public int compareTo(IDateTime other) { //compares dates chronologically 
+	public int compareTo(IDateTime other) {
 		
 		
 		if (year != other.getYear())
@@ -57,6 +59,15 @@ public class DateTime implements IDateTime {
 							 
 		return 0;
 		}
+	
+	public static DateTime parse(String s) {
+	    // format: MM/DD/YYYY HH:MM
+	    String[] parts = s.trim().split(" ");
+	    String[] d = parts[0].split("/");
+	    String[] t = parts[1].split(":");
+	    return new DateTime(Integer.parseInt(d[2]), Integer.parseInt(d[0]),
+	                        Integer.parseInt(d[1]), Integer.parseInt(t[0]), Integer.parseInt(t[1]));
+	}
 				
 	
 }
